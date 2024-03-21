@@ -2,21 +2,20 @@
 
 pragma solidity >=0.8.7;
 
-contract findIndex {
+contract SumOfTheArray {
 
     uint[] internal myArray = [10, 22, 33, 44, 55, 66, 77, 88, 99];
 
-    uint public targetIndex;
-    /**
-     * Finds the index of a given number within the array.
-     */
-    function findIndexOfNumber(uint _number) external {
+    function getSumOfTheArray() external view returns(uint) {
+        uint arraySum;
         for(uint i = 0; i < myArray.length; i++) {
-            if(myArray[i] == _number){
-                targetIndex = i;
-            }
+            arraySum += myArray[i];
         }
+
+        return arraySum;
     }
+
+    
 
     /**
      * Returns the entire array.
