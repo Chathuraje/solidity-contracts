@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.12 <0.9.0;
+pragma solidity >=0.8.7;
 
 contract Fundctions {
  /**
@@ -18,10 +18,9 @@ contract Fundctions {
  /**
    * Write Functions
    */
-   function writeMyString() external {
-        myString = "This is a New String";
+   function writeMyString(string memory _myString) external {
+        myString = _myString;
    }
-
 
 
 }
