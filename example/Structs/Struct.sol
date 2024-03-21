@@ -12,7 +12,6 @@ contract Struct {
     // Create a fruit1 Struct and store values
     Fruits public fruit1 = Fruits("Orange", 150, true);
 
-    
     Fruits internal fruit2; // Internal variable to store a fruit struct
     // Function to create a new fruit struct and store values
     function createVar(string memory _name, uint _price, bool _stock) external {
@@ -37,18 +36,5 @@ contract Struct {
     // Function to change the stock status of the stored fruit
     function changeVarStockStatus() external {
         fruit2.stock = !fruit2.stock;
-    }
-
-
-    Fruits[] internal fruitsArray; // Internal array to store multiple fruit structs
-    // Function to add a new fruit struct to the array
-    function addElements(string memory _name, uint _price, bool _stock) external {
-        Fruits memory fruit = Fruits(_name, _price, _stock);
-        fruitsArray.push(fruit);
-    }
-
-    // Function to get the entire array of fruit structs
-    function getArray() external view returns(Fruits[] memory) {
-        return fruitsArray;
     }
 }
