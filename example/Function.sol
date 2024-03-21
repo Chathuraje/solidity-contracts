@@ -37,6 +37,7 @@ contract Fundctions {
   function getMyString2(uint _a) external pure returns(uint myNum) {
     myNum = _a + 5;
   }
+  // This one is cheaper to use
   // Both functions achieve the same result, but `getMyString2` explicitly declares the return variable in the function signature.
 
 
