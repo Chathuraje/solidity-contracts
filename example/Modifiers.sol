@@ -21,9 +21,13 @@ contract Modifiers {
 
     // Same above functions with the Modifier -> Can use multiple times
     modifier isGood(uint _amount) {
+        // can add other codes here
+
         require(_amount > 0, "Amount must be larger than 0");
         require(_amount <= 1000, "Amount must be smaller than or equal to 1000");
-        _;
+        _; // Indicate to go back to function after the modifer is complete 
+
+        // can add other codes here
     }
     function modifierChangeNum1(uint _value) external pure isGood(_value) returns(uint){
 
