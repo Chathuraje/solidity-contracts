@@ -24,6 +24,10 @@ contract Enums {
         return myChoise;
     }
 
+    function getValue2() external pure returns(Juices) {
+        return Juices.LARGE;
+    }
+
     // Create a Array with Enum
     Juices[] internal clientChoices = [Juices.LARGE, Juices.SMALL];
     function getArrayValues() external view returns(Juices[] memory) {
