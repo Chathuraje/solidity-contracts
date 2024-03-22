@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.7;
 
-// Importing the ContractA.sol file to inherit from ContractA
-import "./ContractA.sol";
-
 // ContractB inherits from ContractA
-contract ContractB is ContractA {
+contract ContractB {
 
     /** ----------------------------------------------------------------------------
     * CALL FUNCTION
