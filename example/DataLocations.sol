@@ -89,4 +89,56 @@ contract StorageLocations {
         }
 
 
+
+        /**
+            - CONSTANT VARIABLES AND IMMUTABLE VARIABLES
+                - State variables can be declared as constant or immutable. 
+                - In both cases, the variables cannot be modified after the contract has been constructed. 
+                - For constant variables, the value has to be fixed at compile-time, while for immutable, it can still be assigned at construction time.
+                - It is also possible to define constant variables at the file level.
+                - The compiler does not reserve a storage slot for these variables, and every occurrence is replaced by the respective value.
+                - Compared to regular state variables, the gas costs of constant and immutable variables are much lower. 
+                - For a constant variable, the expression assigned to it is copied to all the places where it is accessed and also re-evaluated each time. 
+                - This allows for local optimizations. 
+                - Immutable variables are evaluated once at construction time and their value is copied to all the places in the code where they are accessed. 
+                - For these values, 32 bytes are reserved, even if they would fit in fewer bytes. 
+                - Due to this, constant values can sometimes be cheaper than immutable values.
+                - Not all types for constants and immutables are implemented at this time. 
+                - The only supported types are strings (only for constants) and value types.
+                - Variable Names should be CAPITAL
+
+
+                1️⃣ Constant
+                    - For constant variables, the value has to be a constant at compile time and it has to be assigned where the variable is declared. 
+                    - Any expression that accesses storage, 
+                        blockchain data (e.g. block.timestamp, address(this).balance or block.number) or 
+                        execution data (msg.value or gasleft()) or 
+                        makes calls to external contracts is disallowed. 
+                    - Expressions that might have a side-effect on memory allocation are allowed, but those that might have a side-effect on other memory objects are not.
+                    - The built-in functions keccak256, sha256, ripemd160, ecrecover, addmod and mulmod are allowed 
+                        (even though, with the exception of keccak256, they do call external contracts).
+                    - The reason behind allowing side-effects on the memory allocator is that it should be possible to construct complex objects like 
+                        e.g. lookup-tables. This feature is not yet fully usable.
+                    - Can initialte inside constructor 
+
+                2️⃣ Immutable
+                    - Variables declared as immutable are a bit less restricted than those declared as constant: 
+                    - Immutable variables can be assigned a value at construction time. 
+                    - The value can be changed at any time before deployment and then it becomes permanent.
+                    - One additional restriction is that immutables can only be assigned to inside expressions for which there is no possibility of being executed after creation. 
+                    - This excludes all modifier definitions and functions other than constructors.
+                    - There are no restrictions on reading immutable variables. 
+                    - The read is even allowed to happen before the variable is written to for the first time because variables in 
+                        Solidity always have a well-defined initial value. For this reason it is also allowed to never explicitly assign a value to an immutable.
+                    - cannot initiate inside constructor
+                    - 
+        */
+
+
+        // Constant
+        uint public immutable MY_NUM = 1245;
+
+        // Imutable
+        string public constant MY_COUNTRY = "New Zeland"; 
+
 }
