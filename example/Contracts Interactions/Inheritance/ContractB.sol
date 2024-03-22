@@ -26,4 +26,17 @@ contract ContractB is ContractA {
 
 
 
+   
+   // Normal Way
+   function checkSuperKeywordChild1() external pure returns(string memory) {
+    return ContractA.returnText("Hello from ContractB");
+   }
+
+    // Use Super Keyword - If we have so many contractas we can use super.
+   function checkSuperKeywordChild2() external pure returns(string memory) {
+    return super.returnText("Hello from ContractB");
+   }
+
+
+
 }
