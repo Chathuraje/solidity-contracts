@@ -13,6 +13,7 @@ contract ContractB is ContractA {
         - When building a Solidity smart contract, the call method should be used anytime you want to interact with another contract from your own contract.
         - Calls can also be used to execute other functions in the recipient smart contract, using Ether provided by the caller to pay for the transaction. 
         - The call function also has the advantage of returning the transaction status as a boolean with the return value sent as a variable. 
+        - When you use the call function to invoke a function of another contract, it can potentially change the state of that contract.
 
         -- Error Handling
             - When using call, it's crucial to handle errors properly. 
