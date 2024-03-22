@@ -10,6 +10,7 @@ contract Assembly {
         - Inline assembly is a way to access the Ethereum Virtual Machine at a low level. 
         - This bypasses several important safety features and checks of Solidity. 
         - You should only use it for tasks that need it, and only if you are confident with using it.
+        - Execution cost for assembly is almost half than normal Solidity cost, but it is not recommended to use assembly unless you are an expert.
         
 
         SMART CONTRACT --> COMPILATION --> BYTECODE --> OPCODE --> EVM
@@ -42,8 +43,8 @@ contract Assembly {
     }
 
     function asemblyReturn2() public view returns(uint) {
+        uint x = number; // Create variable x and assign the value of number to it using solidity
         assembly {
-            let x := sload(number.slot) // Loading a value from storage to EVM register
             mstore(0x0, x)               // Storing the value in memory at position 0x0
             return (0x0, 0x20)           // Returning the result pointer and its size
         }
