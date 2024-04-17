@@ -588,15 +588,16 @@ The provided code defines a contract with an internal array myArray and a functi
 
 ## 10. Error Handling
 
-Solidity has many functions for error handling. Errors can occur at compile time or runtime. Solidity is compiled to byte code and there a syntax error check happens at compile-time, while runtime errors are difficult to catch and occurs mainly while executing the contracts. Some of the runtime errors are out-of-gas error, data type overflow error, divide by zero error, array-out-of-index error 
+Solidity has many functions for error handling. Errors can occur at compile time or runtime. Solidity is compiled to byte code and there a syntax error check happens at compile-time, while runtime errors are difficult to catch and occurs mainly while executing the contracts. Some of the runtime errors are out-of-gas error, data type overflow error, divide by zero error, array-out-of-index error
 
 ### Require Statements
 
 - The `require` statements declare prerequisites for running the function
-    - i.e. it declares the constraints which should be satisfied before executing the code.
-- It accepts a single argument and returns a boolean value after evaluation, it also has a custom string message option. 
-- If false then exception is raised and execution is terminated. 
+  - i.e. it declares the constraints which should be satisfied before executing the code.
+- It accepts a single argument and returns a boolean value after evaluation, it also has a custom string message option.
+- If false then exception is raised and execution is terminated.
 - The unused gas is returned back to the caller and the state is reversed to its original state.
+
 ```solidity
 function requireSendMoney(uint _amount) external pure returns(uint) {
     require(_amount > 0, "Amount must be larger than 0");
@@ -607,6 +608,7 @@ function requireSendMoney(uint _amount) external pure returns(uint) {
 ```
 
 ### Assert Statements
+
 - Its syntax is similar to the require statement.
 - It returns a boolean value after the evaluation of the condition.
 - Based on the return value either the program will continue its execution or it will throw an exception.
@@ -622,12 +624,14 @@ function assertSendMoney(uint _amount) external pure returns(uint) {
     return _amount;
 }
 ```
+
 ### Revert Statements
-- This statement is similar to the require statement. 
-- It does not evaluate any condition and does not depends on any state or statement. 
-- It is used to generate exceptions, display errors, and revert the function call. 
-- This statement contains a string message which indicates the issue related to the information of the exception. 
-- Calling a revert statement implies an exception is thrown, the unused gas is returned and the state reverts to its original state.  
+
+- This statement is similar to the require statement.
+- It does not evaluate any condition and does not depends on any state or statement.
+- It is used to generate exceptions, display errors, and revert the function call.
+- This statement contains a string message which indicates the issue related to the information of the exception.
+- Calling a revert statement implies an exception is thrown, the unused gas is returned and the state reverts to its original state.
 - Revert is used to handle the same exception types as require handles, but with little bit more complex logic.
 
 ```solidity
@@ -641,7 +645,8 @@ function revertSendMoney(uint _amount) external pure returns(uint) {
 ```
 
 ### Custom Errors
-- Solidity allows you to define custom errors using the `error` keyword. 
+
+- Solidity allows you to define custom errors using the `error` keyword.
 - Custom errors help optimize gas costs by avoiding unnecessary storage operations and provide more informative error messages.
 
 ```solidity
@@ -657,12 +662,14 @@ function customSendMoney(uint _amount) external view returns(uint) {
 ```
 
 ## 11. Constructor in Solidity
-A constructor is automatically executed only once when the contract is deployed to the blockchain. It’s responsible for initializing the contract’s state variables and configuring its initial state. 
+
+A constructor is automatically executed only once when the contract is deployed to the blockchain. It’s responsible for initializing the contract’s state variables and configuring its initial state.
+
 - Think of constructors as the “onboarding” process for a contract — setting up everything it needs to function correctly.
 - A contract can have only one constructor.
 - A constructor code is executed once when a contract is created and it is used to initialize contract state.
-- After a constructor code executed, the final code is deployed to blockchain. 
-- This code include public functions and code reachable through public functions. 
+- After a constructor code executed, the final code is deployed to blockchain.
+- This code include public functions and code reachable through public functions.
 - Constructor code or any internal method used only by constructor are not included in final code.
 - A constructor can be either public or internal.
 - A internal constructor marks the contract as abstract.
@@ -677,6 +684,7 @@ constructor() {
 ```
 
 We can add parameters to get as a input when we deploying the contract.
+
 ```solidity
 address public owner;
 
@@ -687,9 +695,8 @@ constructor(uint _num) {
 }
 ```
 
-
-
 ## 12. Function Modifires
+
 In Solidity, a function modifier is a piece of code that can change the behavior of a function in a contract. Modifiers are used to enforce access control, validate inputs, or perform other checks before executing the actual function code.
 Modifiers are a powerful feature in Solidity that help in writing cleaner and more secure code by separating concerns and avoiding code duplication. They can be reused across multiple functions within the same contract.
 
@@ -716,6 +723,7 @@ function changeOwner(address _newOwner) public onlyOwner {
     owner = _newOwner;
 }
 ```
+
 In the provided Solidity contract, onlyOwner is a function modifier. It restricts access to certain functions by allowing them to be called only by the contract owner. This modifier is then applied to the changeOwner function, ensuring that only the current owner can change the owner address.
 
 ```solidity
@@ -734,7 +742,26 @@ function deposit(uint _amount) public payable limit(_amount) {
     // Deposit logic
 }
 ```
+
 In summary, the deposit function allows users to deposit funds into the contract, but only if the value sent with the transaction is at least equal to the specified amount. This ensures that users cannot deposit less than the specified amount, enforcing a minimum deposit requirement.
+
+```solidity
+// Modifier to excute codes after the function runs
+modifier after() {
+    _;
+    // Code to run after the function
+    // For example, you might emit an event or perform additional logic here
+}
+
+function withdraw(uint _amount) public after {
+    // Withdraw logic
+    // Here you would implement the logic to withdraw the specified amount
+    // After the function runs, the code inside the `after` modifier will be executed
+    // You might emit an event indicating the withdrawal or perform additional clean-up tasks
+}
+```
+
+This Solidity code snippet defines a modifier named after, which allows executing code after the function's main logic runs. Inside the modifier, \_; serves as a placeholder for the function's original code, and any additional code follows it. The withdraw function utilizes this modifier, ensuring that the logic inside the after modifier executes after the withdrawal operation completes. This pattern is useful for performing post-function cleanup tasks, emitting events, or executing additional logic after the primary function logic executes.
 
 ## Contributing
 
