@@ -2,12 +2,6 @@
 pragma solidity >=0.8.7;
 
 contract CallFunctions {
-    address internal owner;
-
-    constructor() {
-        owner = msg.sender;
-    }
-
     string internal name = "KeyBoard";
     uint internal price = 1500;
     bool internal stock = true;
@@ -31,7 +25,6 @@ contract CallFunctions {
             _stock: true
         });
     }
-
 
     function getValues() external view returns(string memory, uint, bool) {
         return (name, price, stock);

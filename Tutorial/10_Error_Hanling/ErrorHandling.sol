@@ -59,7 +59,7 @@ contract ErrorHandling {
         }
     }
 
-    /*  3. Custom Errors
+    /*  4. Custom Errors
             - Solidity allows you to define custom errors using the `error` keyword. 
             - Custom errors help optimize gas costs by avoiding unnecessary storage operations and provide more informative error messages.
     */
